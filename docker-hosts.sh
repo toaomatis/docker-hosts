@@ -5,7 +5,7 @@ hosts_file="/etc/hosts"
 # Make sure only root can run our script
 if [ "$(id -u)" != "0" ]; then
     echo "This script must be run as root" 1>&2
-    #exit 1
+    exit 1
     # Local hosts file just for testing
     # Comment out the exit 1 above
     hosts_file="hosts"
