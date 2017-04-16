@@ -11,12 +11,14 @@ if [ "$(id -u)" != "0" ]; then
     hosts_file="hosts"
 fi
 
-# Remove all lines starting with a Docker IP Address (typically 172.* range) 
+# Remove all lines starting with a Docker IP Address (typically 172.* range)
 # and ending with the .docker suffix/tld
 sed -i '/^172\..*\.docker/d' $hosts_file
 
 for container_name in $(docker ps --format "{{.Names}}");
 do
-    container_ip=$(docker inspect --format "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" $container_name)
-    echo $container_ip $container_name".docker" >> $hosts_file
+    for container_ip in $(docker inspect --format "{{range .NetworkSettings.Networks}}{{.IPAddress}} {{end}}" $container_name);
+    do
+        echo $container_ip $container_name".docker" | tee -a $hosts_file
+    done
 done
