@@ -1,5 +1,6 @@
 #!/home/mathijs/git/docker/docker-hosts/env/bin/python3
 
+import argparse
 import docker
 
 NL = "\n"
@@ -55,6 +56,13 @@ def update_ips():
     write_lines(lines)
     return
 
+
+parser = argparse.ArgumentParser(description='Add Docker Hosts IP Addresses to hosts file.')
+parser.add_argument('--file', help='the hosts file to manipulate (default: hosts)')
+args = parser.parse_args()
+
+if "file" in args:
+    HOSTS_FILE = args.file
 
 try:
     print("try")

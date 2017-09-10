@@ -6,7 +6,7 @@ After=docker.service
 Type=simple
 User=root
 WorkingDirectory=/home/mathijs/git/docker/docker-hosts
-ExecStart=/home/mathijs/git/docker/docker-hosts/docker-hosts.py --file=/etc/hosts
+ExecStart=/home/mathijs/git/docker/docker-hosts/docker-hosts.py --file /etc/hosts
 Restart=always
 RestartSec=10
 
