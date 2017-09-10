@@ -1,3 +1,5 @@
+#!/home/mathijs/git/docker/docker-hosts/env/bin/python3
+
 import docker
 
 NL = "\n"
