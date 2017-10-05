@@ -5,8 +5,9 @@ import docker
 
 NL = "\n"
 HOSTS_FILE = "hosts"
-DOCKER_HOSTS_START = "# Docker hosts start"+NL
-DOCKER_HOSTS_END = "# Docker hosts end"+NL
+DOCKER_HOSTS_START = "# Docker hosts start" + NL
+DOCKER_HOSTS_END = "# Docker hosts end" + NL
+DOCKER_TLD = "dev"
 
 client = docker.from_env()
 
@@ -49,8 +50,9 @@ def update_ips():
     for container in client.containers.list():
         print("# {0}".format(container.name))
         for network in container.attrs['NetworkSettings']['Networks']:
-            ip_addresses = "{1} {0}.docker".format(container.name,
-                                                   container.attrs['NetworkSettings']['Networks'][network]['IPAddress'])
+            ip_addresses = "{1} {0}.{2}".format(container.name,
+                                                container.attrs['NetworkSettings']['Networks'][network]['IPAddress'],
+                                                DOCKER_TLD)
             print(ip_addresses)
             lines.append(ip_addresses + NL)
     write_lines(lines)
@@ -62,7 +64,8 @@ parser.add_argument('--file', help='the hosts file to manipulate (default: hosts
 args = parser.parse_args()
 
 if "file" in args:
-    HOSTS_FILE = args.file
+    if args.file is not None:
+        HOSTS_FILE = args.file
 
 try:
     print("try")
