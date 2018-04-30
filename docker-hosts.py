@@ -7,7 +7,7 @@ NL = "\n"
 HOSTS_FILE = "hosts"
 DOCKER_HOSTS_START = "# Docker hosts start" + NL
 DOCKER_HOSTS_END = "# Docker hosts end" + NL
-DOCKER_TLD = "dev"
+DOCKER_TLD = "test"
 
 client = docker.from_env()
 
