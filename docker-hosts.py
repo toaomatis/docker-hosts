@@ -2,6 +2,7 @@
 
 import argparse
 import docker
+import os
 
 NL = "\n"
 HOSTS_FILE = "hosts"
@@ -14,6 +15,8 @@ client = docker.from_env()
 
 def remove_lines():
     print(remove_lines.__name__)
+    if not os.path.exists(HOSTS_FILE):
+        return
     file = open(HOSTS_FILE, "r+")
     lines = file.readlines()
     file.seek(0)
