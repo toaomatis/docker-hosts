@@ -9,8 +9,8 @@ git clone https://gitlab.huntfield35.nl/docker/docker-hosts.git
 ```
 
 There are two ways to install and configure this service:
-* Using the `install.sh` script
-* Manual
+* [Using the `install.sh` script](#installation-using-the-installsh-script)
+* [Manual](#manual-installation)
 
 # Installation using the `install.sh` script
 Run the `install.sh` script as regular user. You'll be prompted when elevated privileges are necessary.
