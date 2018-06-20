@@ -11,18 +11,22 @@ DIR=$(dirname $(readlink -f $0))
 DIR_USER=$(stat -c '%U' $DIR)
 VENV_DIR="$DIR/env"
 SERVICE_DIR='/etc/systemd/system'
+SUDO='sudo'
 
 if [[ $EUID -eq 0 ]]; then
-   pretty_print "${RED}This script must not be run as root!$NC"
-   pretty_print "Run as $RED$DIR_USER$GREEN instead."
-   pretty_print "You'll be prompted when elevated privileges are necessary."
-   exit 1
+  if [[ $(whoami) -ne $DIR_USER ]]; then
+    pretty_print "${RED}This script must not be run as root!$NC"
+    pretty_print "Run as $RED$DIR_USER$GREEN instead."
+    pretty_print "You'll be prompted when elevated privileges are necessary."
+    exit 1
+  fi
+  SUDO=''
 fi
 
 export DEBIAN_FRONTEND=noninteractive
 
 pretty_print "Installing dependencies"
-sudo apt --yes install python3 python3-pip
+$SUDO apt --yes install python3 python3-pip
 
 pretty_print "Installing Docker Hosts from $RED$DIR$NC"
 pip3 install virtualenv
@@ -40,11 +44,11 @@ pretty_print "Adapt absolute paths in sources"
 sed -i -e "s|/home/mathijs/git/docker/docker-hosts|$(pwd)|g" $(grep -Irl /home/mathijs/git/docker/docker-hosts)
 
 pretty_print "Copy service files to $RED$SERVICE_DIR"
-sudo cp docker-hosts.service $SERVICE_DIR
+$SUDO cp docker-hosts.service $SERVICE_DIR
 pretty_print "Install and enable the service"
-sudo systemctl daemon-reload
-sudo systemctl start docker-hosts.service
-sudo systemctl enable docker-hosts.service
+$SUDO systemctl daemon-reload
+$SUDO systemctl start docker-hosts.service
+$SUDO systemctl enable docker-hosts.service
 
 pretty_print "Verify if ${RED}docker-hosts.service${GREEN} is running"
 systemctl status docker-hosts.service
