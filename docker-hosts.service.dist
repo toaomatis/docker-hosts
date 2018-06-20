@@ -1,0 +1,14 @@
+[Unit]
+Description=Docker Hosts Service
+After=docker.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=%REPLACE_ME%
+ExecStart=%REPLACE_ME%/docker-hosts.py --file /etc/hosts
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

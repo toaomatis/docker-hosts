@@ -41,7 +41,9 @@ pip install docker
 deactivate
 
 pretty_print "Adapt absolute paths in sources"
-sed -i -e "s|/home/mathijs/git/docker/docker-hosts|$(pwd)|g" $(grep -Irl /home/mathijs/git/docker/docker-hosts)
+cp docker-hosts.py.dist docker-hosts.py
+cp docker-hosts.service.dist docker-hosts.service
+sed -i -e "s|%REPLACE_ME%|$(pwd)|g" docker-hosts.py docker-hosts.service
 
 pretty_print "Copy service files to $RED$SERVICE_DIR"
 $SUDO cp docker-hosts.service $SERVICE_DIR

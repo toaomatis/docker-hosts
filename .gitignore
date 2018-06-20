@@ -1,3 +1,5 @@
 /hosts
 /.idea/
 /env/
+/docker-hosts.py
+/docker-hosts.service

@@ -48,7 +48,9 @@ Due to the way python and Linux' services work, we need to manually adapt some h
 
 This can be done by executing the following shell script from the source root
 ```sh
-sed -i -e "s|/home/mathijs/git/docker/docker-hosts|$(pwd)|g" $(grep -Irl /home/mathijs/git/docker/docker-hosts)
+cp docker-hosts.py.dist docker-hosts.py
+cp docker-hosts.service.dist docker-hosts.service
+sed -i -e "s|%REPLACE_ME%|$(pwd)|g" docker-hosts.py docker-hosts.service
 ```
 
 Install the service as a super user, start and enable it so it runs every system (re)start.
