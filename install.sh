@@ -25,17 +25,17 @@ fi
 
 export DEBIAN_FRONTEND=noninteractive
 
-pretty_print "Installing dependencies"
-$SUDO apt --yes install python3 python3-pip
-
 pretty_print "Installing Docker Hosts from $RED$DIR$NC"
-pip3 install virtualenv
+
+pretty_print "Installing dependencies"
+$SUDO apt --yes install python3 python3-pip python3-venv
 
 pretty_print "Creating a virtualenv in $RED$VENV_DIR$NC"
 python3 -m venv $VENV_DIR
 
 pretty_print "Activating the virtualenv"
 source env/bin/activate
+
 pretty_print "Install docker inside virtualenv"
 pip install docker
 deactivate
@@ -45,6 +45,7 @@ sed -i -e "s|/home/mathijs/git/docker/docker-hosts|$(pwd)|g" $(grep -Irl /home/m
 
 pretty_print "Copy service files to $RED$SERVICE_DIR"
 $SUDO cp docker-hosts.service $SERVICE_DIR
+
 pretty_print "Install and enable the service"
 $SUDO systemctl daemon-reload
 $SUDO systemctl start docker-hosts.service
