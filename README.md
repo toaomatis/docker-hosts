@@ -24,14 +24,9 @@ cd docker-Hosts
 To run this service, you need a few dependencies.
 ## Dependencies
 
-### python3 pip
+### python3 pip virtualenv
 ```sh
-sudo apt install python3 python3-pip
-```
-
-### virtualenv
-```sh
-pip3 install virtualenv
+sudo apt install python3 python3-pip python3-venv
 ```
 
 Navigate to the source directory and create a virtual environment
