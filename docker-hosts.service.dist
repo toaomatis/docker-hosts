@@ -5,8 +5,8 @@ After=docker.service
 [Service]
 Type=simple
 User=root
-WorkingDirectory=/home/mathijs/git/docker/docker-hosts
-ExecStart=/home/mathijs/git/docker/docker-hosts/docker-hosts.py --file /etc/hosts
+WorkingDirectory=%REPLACE_ME%
+ExecStart=%REPLACE_ME%/docker-hosts.py --file /etc/hosts
 Restart=always
 RestartSec=10
 

@@ -1,4 +1,4 @@
-#!/home/mathijs/git/docker/docker-hosts/env/bin/python3
+#!%REPLACE_ME%/env/bin/python3
 
 import argparse
 import docker
