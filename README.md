@@ -20,8 +20,8 @@ cd docker-Hosts
 ```
 
 # Manual Installation
-
 To run this service, you need a few dependencies.
+
 ## Dependencies
 
 ### python3 pip virtualenv
